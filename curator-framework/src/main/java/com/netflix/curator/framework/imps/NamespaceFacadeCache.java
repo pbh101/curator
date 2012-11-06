@@ -2,7 +2,7 @@ package com.netflix.curator.framework.imps;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
+import com.google.common.cache.Cache;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +18,7 @@ class NamespaceFacadeCache
             return new NamespaceFacade(client, namespace);
         }
     };
-    private final LoadingCache<String, NamespaceFacade> cache = CacheBuilder.newBuilder()
+    private final Cache<String, NamespaceFacade> cache = CacheBuilder.newBuilder()
         .expireAfterAccess(5, TimeUnit.MINUTES) // does this need config? probably not
         .build(loader);
 
